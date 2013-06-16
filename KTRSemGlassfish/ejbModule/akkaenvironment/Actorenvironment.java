@@ -17,6 +17,7 @@ import akka.actor.Props;
 import akka.pattern.Patterns;
 import akka.util.Timeout;
 import akkaenvironment.actors.TestActor;
+import akkaenvironment.actors.TestActor1;
 import akkaenvironment.actors.Testmessage;
 import akkaenvironment.wrapper.ActorRefTimeWrapper;
 import akkaenvironment.wrapper.JobTimeWrapper;
@@ -52,20 +53,22 @@ public class Actorenvironment {
 	}
 
 	private void generateActorPreTable() {
-		actorPreTable.put(TestActor.class.getName(),
-				new PropsPreAvailableWrapper(TestActor.class.getName(),
-						"Actor zum Testen", new Props(TestActor.class)));
+
+		actorPreTable.put(TestActor1.class.getName(),
+				new PropsPreAvailableWrapper(TestActor1.class.getName(),
+						"Testactor", new Props(TestActor1.class)));
 	}
 
+	// remote not possible
 	public String generateActorDirectly(Props props, long timeout) {
 		ActorRef actor = actorsys.actorOf(props);
 		ActorRefTimeWrapper tmp = new ActorRefTimeWrapper(actor,
 				(System.currentTimeMillis() + timeout));
 		actorRefTable.put(actor.toString(), tmp);
 		return actor.toString();
-
 	}
 
+	// remote not possible
 	public int addPropsOnly(Props props, long timeout) {
 		PropsTimeWrapper tmp = new PropsTimeWrapper(props,
 				System.currentTimeMillis() + timeout);
@@ -74,6 +77,7 @@ public class Actorenvironment {
 		return hash;
 	}
 
+	// remote not possible
 	public String generateActorIndirectly(int propsid, long timeout) {
 		PropsTimeWrapper props = propsTable.get(propsid);
 		if (props == null) {

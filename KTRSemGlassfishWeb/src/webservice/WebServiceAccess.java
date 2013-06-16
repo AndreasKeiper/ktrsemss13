@@ -36,7 +36,8 @@ public class WebServiceAccess {
 			return actorenv.generateActorDirectly(
 					(Props) SerializationHelper.deserialize(props), timeout);
 		} catch (ClassNotFoundException | IOException e) {
-			logger.warning("generateActorDirectly failed");
+			logger.warning("Direct actor generation failed!");
+			e.printStackTrace();
 			return "Error";
 		}
 
@@ -50,6 +51,7 @@ public class WebServiceAccess {
 					(Props) SerializationHelper.deserialize(props), timeout);
 		} catch (ClassNotFoundException | IOException e) {
 			logger.warning("addPropsOnly failed");
+			e.printStackTrace();
 			return 0;
 		}
 	}
@@ -64,13 +66,17 @@ public class WebServiceAccess {
 	@WebMethod
 	@WebResult(name = "resultmessage")
 	public byte[] sendMessage(@WebParam(name = "jobmessage") JobMessage msg) {
+		String actorid = msg.getActorid();
+		int waittime = msg.getWaittime();
+		byte[] content = msg.getMsg();
+
 		try {
-			return SerializationHelper.serialize(actorenv.sendMessage(
-					msg.getActorid(),
-					SerializationHelper.deserialize(msg.getMsg()),
-					msg.getWaittime()));
-		} catch (ClassNotFoundException | IOException e) {
+			Object msgobj = (Object) SerializationHelper.deserialize(content);
+			Object respobj = actorenv.sendMessage(actorid, msgobj, waittime);
+			return SerializationHelper.serialize(respobj);
+		} catch (IOException | ClassNotFoundException e) {
 			logger.warning("sendMessage failed");
+			e.printStackTrace();
 			return null;
 		}
 	}

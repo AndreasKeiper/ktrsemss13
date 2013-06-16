@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="akka-2.1.2-mod/lib/scala-library.jar"/>
 	<classpathentry kind="lib" path="akka-2.1.2-mod/lib/akka/akka-actor_2.10-2.1.2.jar"/>
 	<classpathentry kind="lib" path="akka-2.1.2-mod/lib/akka/akka-agent_2.10-2.1.2.jar"/>
@@ -30,5 +28,7 @@
 	<classpathentry kind="lib" path="akka-2.1.2-mod/lib/akka/slf4j-api-1.7.2.jar"/>
 	<classpathentry kind="lib" path="akka-2.1.2-mod/lib/akka/uncommons-maths-1.2.2a.jar"/>
 	<classpathentry kind="lib" path="akka-2.1.2-mod/lib/akka/zeromq-scala-binding_2.10-0.0.7.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.7.0_01 sdk"/>
+	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

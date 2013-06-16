@@ -9,6 +9,10 @@ public class JobMessageAsync {
 	private String actorid;
 	private byte[] msg;
 
+	public JobMessageAsync() {
+		super();
+	}
+
 	public JobMessageAsync(String actorid, byte[] msg) {
 		super();
 		this.actorid = actorid;

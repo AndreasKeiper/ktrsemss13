@@ -10,6 +10,10 @@ public class JobMessage {
 	private int waittime;
 	private byte[] msg;
 
+	public JobMessage() {
+		super();
+	}
+
 	public JobMessage(String actorid, int waittime, byte[] msg) {
 		super();
 		this.actorid = actorid;
