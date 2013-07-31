@@ -27,18 +27,18 @@ public interface WebServiceAccess {
 
     /**
      * 
-     * @param jobmessage
+     * @param props
      * @return
-     *     returns byte[]
+     *     returns int
      */
     @WebMethod
-    @WebResult(name = "resultmessage", targetNamespace = "")
-    @RequestWrapper(localName = "sendMessage", targetNamespace = "http://webservice/", className = "ktrsem.ws.clientstub.generated.SendMessage")
-    @ResponseWrapper(localName = "sendMessageResponse", targetNamespace = "http://webservice/", className = "ktrsem.ws.clientstub.generated.SendMessageResponse")
-    @Action(input = "http://webservice/WebServiceAccess/sendMessageRequest", output = "http://webservice/WebServiceAccess/sendMessageResponse")
-    public byte[] sendMessage(
-        @WebParam(name = "jobmessage", targetNamespace = "")
-        JobMessage jobmessage);
+    @WebResult(name = "propsid", targetNamespace = "")
+    @RequestWrapper(localName = "addPropsOnly", targetNamespace = "http://webservice/", className = "ktrsem.ws.clientstub.generated.AddPropsOnly")
+    @ResponseWrapper(localName = "addPropsOnlyResponse", targetNamespace = "http://webservice/", className = "ktrsem.ws.clientstub.generated.AddPropsOnlyResponse")
+    @Action(input = "http://webservice/WebServiceAccess/addPropsOnlyRequest", output = "http://webservice/WebServiceAccess/addPropsOnlyResponse")
+    public int addPropsOnly(
+        @WebParam(name = "props", targetNamespace = "")
+        byte[] props);
 
     /**
      * 
@@ -72,6 +72,21 @@ public interface WebServiceAccess {
 
     /**
      * 
+     * @param jobmessage
+     * @return
+     *     returns byte[]
+     */
+    @WebMethod
+    @WebResult(name = "resultmessage", targetNamespace = "")
+    @RequestWrapper(localName = "sendMessage", targetNamespace = "http://webservice/", className = "ktrsem.ws.clientstub.generated.SendMessage")
+    @ResponseWrapper(localName = "sendMessageResponse", targetNamespace = "http://webservice/", className = "ktrsem.ws.clientstub.generated.SendMessageResponse")
+    @Action(input = "http://webservice/WebServiceAccess/sendMessageRequest", output = "http://webservice/WebServiceAccess/sendMessageResponse")
+    public byte[] sendMessage(
+        @WebParam(name = "jobmessage", targetNamespace = "")
+        JobMessage jobmessage);
+
+    /**
+     * 
      * @param jobmessageasync
      * @return
      *     returns java.lang.String
@@ -102,6 +117,18 @@ public interface WebServiceAccess {
 
     /**
      * 
+     * @param ownclass
+     */
+    @WebMethod
+    @RequestWrapper(localName = "defineOwnClass", targetNamespace = "http://webservice/", className = "ktrsem.ws.clientstub.generated.DefineOwnClass")
+    @ResponseWrapper(localName = "defineOwnClassResponse", targetNamespace = "http://webservice/", className = "ktrsem.ws.clientstub.generated.DefineOwnClassResponse")
+    @Action(input = "http://webservice/WebServiceAccess/defineOwnClassRequest", output = "http://webservice/WebServiceAccess/defineOwnClassResponse")
+    public void defineOwnClass(
+        @WebParam(name = "ownclass", targetNamespace = "")
+        byte[] ownclass);
+
+    /**
+     * 
      * @return
      *     returns java.util.List<ktrsem.ws.clientstub.generated.PropsPreAvailableMessage>
      */
@@ -126,20 +153,5 @@ public interface WebServiceAccess {
     public String generatePreAvailableActor(
         @WebParam(name = "propsid", targetNamespace = "")
         String propsid);
-
-    /**
-     * 
-     * @param props
-     * @return
-     *     returns int
-     */
-    @WebMethod
-    @WebResult(name = "propsid", targetNamespace = "")
-    @RequestWrapper(localName = "addPropsOnly", targetNamespace = "http://webservice/", className = "ktrsem.ws.clientstub.generated.AddPropsOnly")
-    @ResponseWrapper(localName = "addPropsOnlyResponse", targetNamespace = "http://webservice/", className = "ktrsem.ws.clientstub.generated.AddPropsOnlyResponse")
-    @Action(input = "http://webservice/WebServiceAccess/addPropsOnlyRequest", output = "http://webservice/WebServiceAccess/addPropsOnlyResponse")
-    public int addPropsOnly(
-        @WebParam(name = "props", targetNamespace = "")
-        byte[] props);
 
 }

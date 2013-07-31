@@ -2,7 +2,10 @@ package ktrsem.testclient;
 
 import helper.SerializationHelper;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +17,7 @@ import akka.actor.Props;
 import akkaenvironment.actors.TestActor1;
 import akkaenvironment.actors.TestActor1Request;
 import akkaenvironment.actors.TestActor1Response;
+import akkaenvironment.actors.TestActorIntf;
 
 public class TestMain {
 
@@ -66,7 +70,7 @@ public class TestMain {
 
 		byte[] tmp = null;
 		try {
-			tmp = SerializationHelper.serialize(new Props(TestActor1.class));
+			tmp = SerializationHelper.serialize(new Props(TestActorIntf.class));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -105,7 +109,7 @@ public class TestMain {
 
 		byte[] tmp = null;
 		try {
-			tmp = SerializationHelper.serialize(new Props(TestActor1.class));
+			tmp = SerializationHelper.serialize(new Props(TestActorIntf.class));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -171,6 +175,38 @@ public class TestMain {
 		}
 		System.out.println(resp.getResult());
 
+	}
+
+	public void testDefineOwnActorClass() {
+
+	}
+
+	private byte[] loadDataFromAny(String name, File classesDir) {
+
+		name = name.replace('.', '/');
+		name = name + ".class";
+
+		byte[] ret = null;
+
+		try {
+			File f = new File(classesDir.getAbsolutePath(), name);
+			FileInputStream fis = new FileInputStream(f);
+
+			ByteBuffer bb = ByteBuffer.allocate(4 * 1024);
+			byte[] buf = new byte[1024];
+			int readedBytes = -1;
+
+			while ((readedBytes = fis.read(buf)) != -1) {
+				bb.put(buf, 0, readedBytes);
+			}
+
+			ret = bb.array();
+			fis.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return ret;
 	}
 
 }

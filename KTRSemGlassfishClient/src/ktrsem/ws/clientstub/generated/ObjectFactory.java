@@ -24,12 +24,13 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _SendMessageResponseResultmessage_QNAME = new QName("", "resultmessage");
+    private final static QName _AddPropsOnlyProps_QNAME = new QName("", "props");
     private final static QName _GenerateActorDirectlyResponse_QNAME = new QName("http://webservice/", "generateActorDirectlyResponse");
     private final static QName _DispatchAsyncJobResponse_QNAME = new QName("http://webservice/", "dispatchAsyncJobResponse");
     private final static QName _GenerateActorIndirectlyResponse_QNAME = new QName("http://webservice/", "generateActorIndirectlyResponse");
     private final static QName _AddPropsOnlyResponse_QNAME = new QName("http://webservice/", "addPropsOnlyResponse");
     private final static QName _GetPreAvailablePropsResponse_QNAME = new QName("http://webservice/", "getPreAvailablePropsResponse");
+    private final static QName _DefineOwnClassResponse_QNAME = new QName("http://webservice/", "defineOwnClassResponse");
     private final static QName _GetAsyncJobresultResponse_QNAME = new QName("http://webservice/", "getAsyncJobresultResponse");
     private final static QName _GeneratePreAvailableActor_QNAME = new QName("http://webservice/", "generatePreAvailableActor");
     private final static QName _AddPropsOnly_QNAME = new QName("http://webservice/", "addPropsOnly");
@@ -40,8 +41,10 @@ public class ObjectFactory {
     private final static QName _GetPreAvailableProps_QNAME = new QName("http://webservice/", "getPreAvailableProps");
     private final static QName _SendMessage_QNAME = new QName("http://webservice/", "sendMessage");
     private final static QName _DispatchAsyncJob_QNAME = new QName("http://webservice/", "dispatchAsyncJob");
+    private final static QName _DefineOwnClass_QNAME = new QName("http://webservice/", "defineOwnClass");
     private final static QName _GetAsyncJobresult_QNAME = new QName("http://webservice/", "getAsyncJobresult");
-    private final static QName _AddPropsOnlyProps_QNAME = new QName("", "props");
+    private final static QName _GetAsyncJobresultResponseResultmessage_QNAME = new QName("", "resultmessage");
+    private final static QName _DefineOwnClassOwnclass_QNAME = new QName("", "ownclass");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: ktrsem.ws.clientstub.generated
@@ -56,6 +59,14 @@ public class ObjectFactory {
      */
     public GetPreAvailablePropsResponse createGetPreAvailablePropsResponse() {
         return new GetPreAvailablePropsResponse();
+    }
+
+    /**
+     * Create an instance of {@link DefineOwnClassResponse }
+     * 
+     */
+    public DefineOwnClassResponse createDefineOwnClassResponse() {
+        return new DefineOwnClassResponse();
     }
 
     /**
@@ -163,6 +174,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link DefineOwnClass }
+     * 
+     */
+    public DefineOwnClass createDefineOwnClass() {
+        return new DefineOwnClass();
+    }
+
+    /**
      * Create an instance of {@link GetAsyncJobresult }
      * 
      */
@@ -206,9 +225,9 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "", name = "resultmessage", scope = SendMessageResponse.class)
-    public JAXBElement<byte[]> createSendMessageResponseResultmessage(byte[] value) {
-        return new JAXBElement<byte[]>(_SendMessageResponseResultmessage_QNAME, byte[].class, SendMessageResponse.class, ((byte[]) value));
+    @XmlElementDecl(namespace = "", name = "props", scope = AddPropsOnly.class)
+    public JAXBElement<byte[]> createAddPropsOnlyProps(byte[] value) {
+        return new JAXBElement<byte[]>(_AddPropsOnlyProps_QNAME, byte[].class, AddPropsOnly.class, ((byte[]) value));
     }
 
     /**
@@ -254,6 +273,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://webservice/", name = "getPreAvailablePropsResponse")
     public JAXBElement<GetPreAvailablePropsResponse> createGetPreAvailablePropsResponse(GetPreAvailablePropsResponse value) {
         return new JAXBElement<GetPreAvailablePropsResponse>(_GetPreAvailablePropsResponse_QNAME, GetPreAvailablePropsResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link DefineOwnClassResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice/", name = "defineOwnClassResponse")
+    public JAXBElement<DefineOwnClassResponse> createDefineOwnClassResponse(DefineOwnClassResponse value) {
+        return new JAXBElement<DefineOwnClassResponse>(_DefineOwnClassResponse_QNAME, DefineOwnClassResponse.class, null, value);
     }
 
     /**
@@ -347,6 +375,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link DefineOwnClass }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice/", name = "defineOwnClass")
+    public JAXBElement<DefineOwnClass> createDefineOwnClass(DefineOwnClass value) {
+        return new JAXBElement<DefineOwnClass>(_DefineOwnClass_QNAME, DefineOwnClass.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetAsyncJobresult }{@code >}}
      * 
      */
@@ -359,27 +396,36 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "", name = "resultmessage", scope = GetAsyncJobresultResponse.class)
-    public JAXBElement<byte[]> createGetAsyncJobresultResponseResultmessage(byte[] value) {
-        return new JAXBElement<byte[]>(_SendMessageResponseResultmessage_QNAME, byte[].class, GetAsyncJobresultResponse.class, ((byte[]) value));
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "", name = "props", scope = AddPropsOnly.class)
-    public JAXBElement<byte[]> createAddPropsOnlyProps(byte[] value) {
-        return new JAXBElement<byte[]>(_AddPropsOnlyProps_QNAME, byte[].class, AddPropsOnly.class, ((byte[]) value));
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
-     * 
-     */
     @XmlElementDecl(namespace = "", name = "props", scope = GenerateActorDirectly.class)
     public JAXBElement<byte[]> createGenerateActorDirectlyProps(byte[] value) {
         return new JAXBElement<byte[]>(_AddPropsOnlyProps_QNAME, byte[].class, GenerateActorDirectly.class, ((byte[]) value));
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "", name = "resultmessage", scope = GetAsyncJobresultResponse.class)
+    public JAXBElement<byte[]> createGetAsyncJobresultResponseResultmessage(byte[] value) {
+        return new JAXBElement<byte[]>(_GetAsyncJobresultResponseResultmessage_QNAME, byte[].class, GetAsyncJobresultResponse.class, ((byte[]) value));
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "", name = "resultmessage", scope = SendMessageResponse.class)
+    public JAXBElement<byte[]> createSendMessageResponseResultmessage(byte[] value) {
+        return new JAXBElement<byte[]>(_GetAsyncJobresultResponseResultmessage_QNAME, byte[].class, SendMessageResponse.class, ((byte[]) value));
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "", name = "ownclass", scope = DefineOwnClass.class)
+    public JAXBElement<byte[]> createDefineOwnClassOwnclass(byte[] value) {
+        return new JAXBElement<byte[]>(_DefineOwnClassOwnclass_QNAME, byte[].class, DefineOwnClass.class, ((byte[]) value));
     }
 
 }

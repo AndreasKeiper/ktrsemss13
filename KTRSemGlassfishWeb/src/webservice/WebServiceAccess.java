@@ -125,4 +125,9 @@ public class WebServiceAccess {
 			@WebParam(name = "propsid") String propsid) {
 		return actorenv.generateActorfromPreProps(propsid, timeout);
 	}
+
+	@WebMethod
+	public void defineOwnClass(@WebParam(name = "ownclass") byte[] clazz) {
+		actorenv.defineOwnClass(clazz);
+	}
 }

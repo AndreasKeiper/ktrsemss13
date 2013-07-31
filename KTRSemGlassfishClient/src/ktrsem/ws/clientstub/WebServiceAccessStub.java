@@ -119,4 +119,15 @@ public class WebServiceAccessStub implements WebServiceAccess {
 		return proxy.getAsyncJobresult(jobid);
 	}
 
+	@Override
+	@WebMethod
+	@RequestWrapper(localName = "defineOwnClass", targetNamespace = "http://webservice/", className = "ktrsem.ws.clientstub.generated.DefineOwnClass")
+	@ResponseWrapper(localName = "defineOwnClassResponse", targetNamespace = "http://webservice/", className = "ktrsem.ws.clientstub.generated.DefineOwnClassResponse")
+	@Action(input = "http://webservice/WebServiceAccess/defineOwnClassRequest", output = "http://webservice/WebServiceAccess/defineOwnClassResponse")
+	public void defineOwnClass(
+			@WebParam(name = "ownclass", targetNamespace = "") byte[] ownclass) {
+		proxy.defineOwnClass(ownclass);
+
+	}
+
 }

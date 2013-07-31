@@ -1,7 +1,13 @@
 package akkaenvironment;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.List;
 
 import javax.ejb.ConcurrencyManagement;
 import javax.ejb.ConcurrencyManagementType;
@@ -38,6 +44,8 @@ public class Actorenvironment {
 	private Hashtable<String, JobTimeWrapper> jobsTable;
 	private Hashtable<String, PropsPreAvailableWrapper> actorPreTable;
 	private ActorRef asyncActor;
+	private String packagename = "TestActor1";
+	private ArrayClassLoader loader;
 
 	public Actorenvironment() {
 
@@ -49,14 +57,13 @@ public class Actorenvironment {
 		asyncActor = actorsys.actorOf(async);
 		asyncActor.tell(new AsyncMailboxActorIniMsg(jobsTable), null);
 		actorPreTable = new Hashtable<>();
+		loader = new ArrayClassLoader(Thread.currentThread()
+				.getContextClassLoader());
 		generateActorPreTable();
 	}
 
 	private void generateActorPreTable() {
 
-		actorPreTable.put(TestActor1.class.getName(),
-				new PropsPreAvailableWrapper(TestActor1.class.getName(),
-						"Testactor", new Props(TestActor1.class)));
 	}
 
 	// remote not possible
@@ -167,6 +174,37 @@ public class Actorenvironment {
 		actorRefTable.put(actor.toString(), new ActorRefTimeWrapper(actor,
 				timeout));
 		return actor.toString();
+	}
+
+	public void defineOwnClass(byte[] clazz) {
+		loader.defineClassFromArray(clazz);
+	}
+
+	public static List<File> getPackageContent(String packageName)
+			throws IOException {
+		ArrayList<File> list = new ArrayList<File>();
+		TestActor1 tmp = null;
+		Enumeration<URL> urls = ClassLoader.getSystemClassLoader()
+				.getResources(packageName);
+		while (urls.hasMoreElements()) {
+			URL url = urls.nextElement();
+			File dir = new File(url.getFile());
+			for (File f : dir.listFiles()) {
+				list.add(f);
+			}
+		}
+		return list;
+	}
+
+	public static void showFiles(File[] files) {
+		for (File file : files) {
+			if (file.isDirectory()) {
+				System.out.println("Directory: " + file.getName());
+				showFiles(file.listFiles()); // Calls same method again.
+			} else {
+				System.out.println("File: " + file.getName());
+			}
+		}
 	}
 
 }
