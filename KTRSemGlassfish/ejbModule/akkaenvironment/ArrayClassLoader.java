@@ -6,8 +6,10 @@ public class ArrayClassLoader extends ClassLoader {
 		super(parent);
 	}
 
-	public Class defineClassFromArray(byte[] clazz) {
-		return defineClass(null, clazz, 0, clazz.length);
+	public Class<?> defineClassFromArray(byte[] clazz) {
+		Class<?> tmp = defineClass(null, clazz, 0, clazz.length);
+		resolveClass(tmp);
+		return tmp;
 	}
 
 }
