@@ -31,36 +31,15 @@ public class WebServiceAccess {
 
 	@WebMethod
 	@WebResult(name = "actorid")
-	public String generateActorDirectly(@WebParam(name = "props") byte[] props) {
+	public String generateActorFromProps(@WebParam(name = "props") byte[] props) {
 		try {
-			return actorenv.generateActorDirectly(
+			return actorenv.generateActorFromProps(
 					(Props) SerializationHelper.deserialize(props), timeout);
 		} catch (ClassNotFoundException | IOException e) {
 			logger.warning("Direct actor generation failed!");
 			e.printStackTrace();
 			return "Error";
 		}
-
-	}
-
-	@WebMethod
-	@WebResult(name = "propsid")
-	public int addPropsOnly(@WebParam(name = "props") byte[] props) {
-		try {
-			return actorenv.addPropsOnly(
-					(Props) SerializationHelper.deserialize(props), timeout);
-		} catch (ClassNotFoundException | IOException e) {
-			logger.warning("addPropsOnly failed");
-			e.printStackTrace();
-			return 0;
-		}
-	}
-
-	@WebMethod
-	@WebResult(name = "actorid")
-	public String generateActorIndirectly(
-			@WebParam(name = "propsid") int propsid) {
-		return actorenv.generateActorIndirectly(propsid, timeout);
 	}
 
 	@WebMethod
@@ -126,8 +105,4 @@ public class WebServiceAccess {
 		return actorenv.generateActorfromPreProps(propsid, timeout);
 	}
 
-	@WebMethod
-	public void defineOwnClass(@WebParam(name = "ownclass") byte[] clazz) {
-		actorenv.defineOwnClass(clazz);
-	}
 }
