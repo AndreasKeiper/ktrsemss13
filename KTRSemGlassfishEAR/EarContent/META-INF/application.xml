@@ -8,6 +8,6 @@
     </web>
   </module>
   <module>
-    <ejb>KTRSemGlassfish.jar</ejb>
+    <ejb>KTRSemGlassfishEJB.jar</ejb>
   </module>
 </application>

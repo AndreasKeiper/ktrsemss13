@@ -1,7 +1,7 @@
 package akkaenvironment;
 
 import java.util.Collection;
-import java.util.Hashtable;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.ejb.ConcurrencyManagement;
 import javax.ejb.ConcurrencyManagementType;
@@ -31,31 +31,36 @@ import akkaenvironment.wrapper.PropsPreAvailableWrapper;
 public class Actorenvironment {
 
 	private ActorSystem actorsys;
-	private Hashtable<String, ActorRefTimeWrapper> actorRefTable;
-	private Hashtable<String, JobTimeWrapper> jobsTable;
-	private Hashtable<String, PropsPreAvailableWrapper> actorPreTable;
+	private ConcurrentHashMap<String, ActorRefTimeWrapper> actorRefTable;
+	private ConcurrentHashMap<String, JobTimeWrapper> jobsTable;
+	private ConcurrentHashMap<String, PropsPreAvailableWrapper> actorPreTable;
 	private ActorRef asyncActor;
+	private long storageTime = 60000;
 
 	public Actorenvironment() {
 
 		actorsys = ActorSystem.create();
-		actorRefTable = new Hashtable<>();
-		jobsTable = new Hashtable<>();
+		actorRefTable = new ConcurrentHashMap<>();
+		jobsTable = new ConcurrentHashMap<>();
 		Props async = new Props(AsyncMailboxActor.class);
 		asyncActor = actorsys.actorOf(async);
-		asyncActor.tell(new AsyncMailboxActorIniMsg(jobsTable), null);
-		actorPreTable = new Hashtable<>();
+		asyncActor.tell(new AsyncMailboxActorIniMsg(jobsTable, storageTime),
+				null);
+		actorPreTable = new ConcurrentHashMap<>();
 		generateActorPreTable();
 	}
 
 	private void generateActorPreTable() {
-
+		actorPreTable.put(TestActor.class.getName(),
+				new PropsPreAvailableWrapper(TestActor.class.getName(),
+						"Testactor für Echotest mit String", new Props(
+								TestActor.class)));
 	}
 
-	public String generateActorFromProps(Props props, long timeout) {
+	public String generateActorFromProps(Props props) {
 		ActorRef actor = actorsys.actorOf(props);
 		ActorRefTimeWrapper tmp = new ActorRefTimeWrapper(actor,
-				(System.currentTimeMillis() + timeout));
+				(System.currentTimeMillis() + storageTime));
 		actorRefTable.put(actor.toString(), tmp);
 		return actor.toString();
 	}
@@ -81,7 +86,7 @@ public class Actorenvironment {
 	public String test() {
 		Testmessage initmsg = new Testmessage("Bla");
 		Props props = new Props(TestActor.class);
-		String actor = generateActorFromProps(props, 1000000);
+		String actor = generateActorFromProps(props);
 		Testmessage result = (Testmessage) sendMessage(actor, initmsg, 1000000);
 		return result.getContent();
 	}
@@ -111,6 +116,8 @@ public class Actorenvironment {
 		Collection<JobTimeWrapper> jobcol = jobsTable.values();
 		for (ActorRefTimeWrapper wrap : actorcol) {
 			if (wrap.getTimeout() < currentTime) {
+				wrap.getActorref().tell(akka.actor.PoisonPill.getInstance(),
+						null);
 				actorcol.remove(wrap);
 			}
 		}
@@ -121,15 +128,15 @@ public class Actorenvironment {
 		}
 	}
 
-	public Hashtable<String, PropsPreAvailableWrapper> getActorPreTable() {
+	public ConcurrentHashMap<String, PropsPreAvailableWrapper> getActorPreTable() {
 		return actorPreTable;
 	}
 
-	public String generateActorfromPreProps(String propsid, long timeout) {
+	public String generateActorfromPreProps(String propsid) {
 		ActorRef actor = actorsys
 				.actorOf(actorPreTable.get(propsid).getProps());
 		actorRefTable.put(actor.toString(), new ActorRefTimeWrapper(actor,
-				timeout));
+				storageTime));
 		return actor.toString();
 	}
 

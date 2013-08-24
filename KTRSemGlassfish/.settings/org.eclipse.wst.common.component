@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="KTRSemGlassfish">
+    <wb-module deploy-name="KTRSemGlassfishEJB">
         <wb-resource deploy-path="/" source-path="/ejbModule" tag="defaultRootSource"/>
-        <property name="java-output-path" value="/KTRSemGlassfish/build/classes"/>
+        <property name="java-output-path" value="/KTRSemGlassfishEJB/build/classes"/>
     </wb-module>
 </project-modules>

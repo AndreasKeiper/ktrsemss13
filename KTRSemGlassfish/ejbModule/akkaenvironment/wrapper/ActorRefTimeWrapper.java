@@ -4,16 +4,16 @@ import akka.actor.ActorRef;
 
 public class ActorRefTimeWrapper {
 
-	private ActorRef actorref;
+	private ActorRef actorRef;
 	private long timeout;
 
 	public ActorRefTimeWrapper(ActorRef actorref, long timeout) {
-		this.actorref = actorref;
+		this.actorRef = actorref;
 		this.timeout = timeout;
 	}
 
 	public ActorRef getActorref() {
-		return actorref;
+		return actorRef;
 	}
 
 	public long getTimeout() {

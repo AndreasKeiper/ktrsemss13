@@ -6,8 +6,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType
 public class JobMessage {
 
-	private String actorid;
-	private int waittime;
+	private String actorId;
+	private int waitTime;
 	private byte[] msg;
 
 	public JobMessage() {
@@ -16,27 +16,27 @@ public class JobMessage {
 
 	public JobMessage(String actorid, int waittime, byte[] msg) {
 		super();
-		this.actorid = actorid;
-		this.waittime = waittime;
+		this.actorId = actorid;
+		this.waitTime = waittime;
 		this.msg = msg;
 	}
 
 	@XmlElement(name = "actorid", required = true)
 	public String getActorid() {
-		return actorid;
+		return actorId;
 	}
 
 	public void setActorid(String actorid) {
-		this.actorid = actorid;
+		this.actorId = actorid;
 	}
 
 	@XmlElement(name = "waittime", required = true)
 	public int getWaittime() {
-		return waittime;
+		return waitTime;
 	}
 
 	public void setWaittime(int waittime) {
-		this.waittime = waittime;
+		this.waitTime = waittime;
 	}
 
 	@XmlElement(name = "message", required = true)

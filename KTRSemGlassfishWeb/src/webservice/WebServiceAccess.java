@@ -27,14 +27,13 @@ public class WebServiceAccess {
 
 	@EJB(name = "ejb/Actorenvironment")
 	private Actorenvironment actorenv;
-	private long timeout = 60000;
 
 	@WebMethod
 	@WebResult(name = "actorid")
 	public String generateActorFromProps(@WebParam(name = "props") byte[] props) {
 		try {
-			return actorenv.generateActorFromProps(
-					(Props) SerializationHelper.deserialize(props), timeout);
+			Props tmp = (Props) SerializationHelper.deserialize(props);
+			return actorenv.generateActorFromProps(tmp);
 		} catch (ClassNotFoundException | IOException e) {
 			logger.warning("Direct actor generation failed!");
 			e.printStackTrace();
@@ -102,7 +101,7 @@ public class WebServiceAccess {
 	@WebResult(name = "actorid")
 	public String generatePreAvailableActor(
 			@WebParam(name = "propsid") String propsid) {
-		return actorenv.generateActorfromPreProps(propsid, timeout);
+		return actorenv.generateActorfromPreProps(propsid);
 	}
 
 }

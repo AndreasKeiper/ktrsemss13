@@ -1,23 +1,30 @@
 package akkaenvironment;
 
-import java.util.Hashtable;
+import java.util.concurrent.ConcurrentHashMap;
 
 import akkaenvironment.wrapper.JobTimeWrapper;
 
 public class AsyncMailboxActorIniMsg {
 
-	private Hashtable<String, JobTimeWrapper> jobstable;
+	private ConcurrentHashMap<String, JobTimeWrapper> jobsTable;
+	private long storageTime;
 
-	public AsyncMailboxActorIniMsg(Hashtable<String, JobTimeWrapper> jobstable) {
-		this.jobstable = jobstable;
+	public AsyncMailboxActorIniMsg(
+			ConcurrentHashMap<String, JobTimeWrapper> jobstable,
+			long storagetime) {
+		this.jobsTable = jobstable;
+		this.storageTime = storagetime;
 	}
 
 	public String toString() {
 		return "Init";
 	}
 
-	public Hashtable<String, JobTimeWrapper> getJobstable() {
-		return jobstable;
+	public ConcurrentHashMap<String, JobTimeWrapper> getJobstable() {
+		return jobsTable;
 	}
 
+	public long getStorageTime() {
+		return storageTime;
+	}
 }

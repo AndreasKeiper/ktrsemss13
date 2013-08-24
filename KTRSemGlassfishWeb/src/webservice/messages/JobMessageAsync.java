@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType
 public class JobMessageAsync {
 
-	private String actorid;
+	private String actorId;
 	private byte[] msg;
 
 	public JobMessageAsync() {
@@ -15,17 +15,17 @@ public class JobMessageAsync {
 
 	public JobMessageAsync(String actorid, byte[] msg) {
 		super();
-		this.actorid = actorid;
+		this.actorId = actorid;
 		this.msg = msg;
 	}
 
 	public String getActorid() {
-		return actorid;
+		return actorId;
 	}
 
 	@XmlElement(name = "actorid", required = true)
-	public void setActorid(String actorid) {
-		this.actorid = actorid;
+	public void setActorid(String actorId) {
+		this.actorId = actorId;
 	}
 
 	public byte[] getMsg() {

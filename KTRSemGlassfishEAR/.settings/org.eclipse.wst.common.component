@@ -6,7 +6,7 @@
             <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="KTRSemGlassfish.jar" deploy-path="/" handle="module:/resource/KTRSemGlassfish/KTRSemGlassfish">
+        <dependent-module archiveName="KTRSemGlassfishEJB.jar" deploy-path="/" handle="module:/resource/KTRSemGlassfishEJB/KTRSemGlassfishEJB">
             <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>

@@ -4,7 +4,7 @@
 	<comment></comment>
 	<projects>
 		<project>KTRSemGlassfishWeb</project>
-		<project>KTRSemGlassfish</project>
+		<project>KTRSemGlassfishEJB</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
