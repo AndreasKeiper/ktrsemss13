@@ -2,7 +2,6 @@ package webservice;
 
 import helper.SerializationHelper;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -30,20 +29,22 @@ public class WebServiceAccess {
 
 	@WebMethod
 	@WebResult(name = "actorid")
-	public String generateActorFromProps(@WebParam(name = "props") byte[] props) {
+	public String generateActorFromProps(@WebParam(name = "props") byte[] props)
+			throws ServerFault {
 		try {
 			Props tmp = (Props) SerializationHelper.deserialize(props);
 			return actorenv.generateActorFromProps(tmp);
-		} catch (ClassNotFoundException | IOException e) {
-			logger.warning("Direct actor generation failed!");
-			e.printStackTrace();
-			return "Error";
+		} catch (Exception e) {
+			logger.warning("Direct actor generation failed! Error: "
+					+ e.getMessage());
+			throw new ServerFault(e.getMessage());
 		}
 	}
 
 	@WebMethod
 	@WebResult(name = "resultmessage")
-	public byte[] sendMessage(@WebParam(name = "jobmessage") JobMessage msg) {
+	public byte[] sendMessage(@WebParam(name = "jobmessage") JobMessage msg)
+			throws ServerFault {
 		String actorid = msg.getActorid();
 		int waittime = msg.getWaittime();
 		byte[] content = msg.getMsg();
@@ -52,36 +53,37 @@ public class WebServiceAccess {
 			Object msgobj = (Object) SerializationHelper.deserialize(content);
 			Object respobj = actorenv.sendMessage(actorid, msgobj, waittime);
 			return SerializationHelper.serialize(respobj);
-		} catch (IOException | ClassNotFoundException e) {
-			logger.warning("sendMessage failed");
-			e.printStackTrace();
-			return null;
+		} catch (Exception e) {
+			logger.warning("sendMessage failed! Error: " + e.getMessage());
+			throw new ServerFault(e.getMessage());
 		}
 	}
 
 	@WebMethod
 	@WebResult(name = "jobid")
 	public String dispatchAsyncJob(
-			@WebParam(name = "jobmessageasync") JobMessageAsync msg) {
+			@WebParam(name = "jobmessageasync") JobMessageAsync msg)
+			throws ServerFault {
 
 		try {
 			return actorenv.dispatchAsyncJob(msg.getActorid(),
 					SerializationHelper.deserialize(msg.getMsg()));
-		} catch (ClassNotFoundException | IOException e) {
-			logger.warning("dispatchAsyncJob failed");
-			return "Error";
+		} catch (Exception e) {
+			logger.warning("dispatchAsyncJob failed! Error: " + e.getMessage());
+			throw new ServerFault(e.getMessage());
 		}
 	}
 
 	@WebMethod
 	@WebResult(name = "resultmessage")
-	public byte[] getAsyncJobresult(@WebParam(name = "jobid") String jobid) {
+	public byte[] getAsyncJobresult(@WebParam(name = "jobid") String jobid)
+			throws ServerFault {
 		try {
 			return SerializationHelper.serialize(actorenv
 					.getAsyncJobresult(jobid));
-		} catch (IOException e) {
-			logger.warning("getAsyncJobresult failed");
-			return null;
+		} catch (Exception e) {
+			logger.warning("getAsyncJobresult failed! Error: " + e.getMessage());
+			throw new ServerFault(e.getMessage());
 		}
 	}
 
@@ -100,8 +102,14 @@ public class WebServiceAccess {
 	@WebMethod
 	@WebResult(name = "actorid")
 	public String generatePreAvailableActor(
-			@WebParam(name = "propsid") String propsid) {
-		return actorenv.generateActorfromPreProps(propsid);
+			@WebParam(name = "propsid") String propsid) throws ServerFault {
+		try {
+			return actorenv.generateActorfromPreProps(propsid);
+		} catch (Exception e) {
+			logger.warning("generatePreAvailableActor failed! Error: "
+					+ e.getMessage());
+			throw new ServerFault(e.getMessage());
+		}
 	}
 
 }
