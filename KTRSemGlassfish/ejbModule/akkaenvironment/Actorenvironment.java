@@ -17,7 +17,7 @@ import akka.actor.Props;
 import akka.pattern.Patterns;
 import akka.util.Timeout;
 import akkaenvironment.actors.TestActor;
-import akkaenvironment.actors.Testmessage;
+import akkaenvironment.actors.TestMessage;
 import akkaenvironment.wrapper.ActorRefTimeWrapper;
 import akkaenvironment.wrapper.JobTimeWrapper;
 import akkaenvironment.wrapper.PropsPreAvailableWrapper;
@@ -84,10 +84,10 @@ public class Actorenvironment {
 	}
 
 	public String test() {
-		Testmessage initmsg = new Testmessage("Bla");
+		TestMessage initmsg = new TestMessage("Bla");
 		Props props = new Props(TestActor.class);
 		String actor = generateActorFromProps(props);
-		Testmessage result = (Testmessage) sendMessage(actor, initmsg, 1000000);
+		TestMessage result = (TestMessage) sendMessage(actor, initmsg, 1000000);
 		return result.getContent();
 	}
 

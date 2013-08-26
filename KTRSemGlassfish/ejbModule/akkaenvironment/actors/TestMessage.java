@@ -1,10 +1,10 @@
 package akkaenvironment.actors;
 
-public class Testmessage {
+public class TestMessage {
 
 	private String content;
 
-	public Testmessage(String content) {
+	public TestMessage(String content) {
 		this.content = content;
 	}
 
