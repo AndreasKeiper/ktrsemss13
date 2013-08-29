@@ -17,7 +17,6 @@ import akka.actor.Props;
 import akka.pattern.Patterns;
 import akka.util.Timeout;
 import akkaenvironment.actors.TestActor;
-import akkaenvironment.actors.TestMessage;
 import akkaenvironment.wrapper.ActorRefTimeWrapper;
 import akkaenvironment.wrapper.JobTimeWrapper;
 import akkaenvironment.wrapper.PropsPreAvailableWrapper;
@@ -44,8 +43,8 @@ public class Actorenvironment {
 		jobsTable = new ConcurrentHashMap<>();
 		Props async = new Props(AsyncMailboxActor.class);
 		asyncActor = actorsys.actorOf(async);
-		asyncActor.tell(new AsyncMailboxActorIniMsg(jobsTable, storageTime),
-				null);
+		asyncActor.tell(new AsyncMailboxActorIniMsg(jobsTable, actorRefTable,
+				storageTime), null);
 		actorPreTable = new ConcurrentHashMap<>();
 		generateActorPreTable();
 	}
@@ -65,7 +64,8 @@ public class Actorenvironment {
 		return actor.toString();
 	}
 
-	public Object sendMessage(String actorid, Object msg, int waittime) {
+	public Object sendMessage(String actorid, Object msg, int waittime)
+			throws Exception {
 		ActorRefTimeWrapper tmp = actorRefTable.get(actorid);
 		if (tmp == null) {
 			return null;
@@ -74,31 +74,19 @@ public class Actorenvironment {
 			Timeout timeout = new Timeout(Duration.create(waittime, "seconds"));
 			Future<Object> future = Patterns.ask(actor, msg, timeout);
 			Object result;
-			try {
-				result = Await.result(future, timeout.duration());
-			} catch (Exception e) {
-				return null;
-			}
+			result = Await.result(future, timeout.duration());
 			return result;
 		}
 	}
 
-	public String test() {
-		TestMessage initmsg = new TestMessage("Bla");
-		Props props = new Props(TestActor.class);
-		String actor = generateActorFromProps(props);
-		TestMessage result = (TestMessage) sendMessage(actor, initmsg, 1000000);
-		return result.getContent();
-	}
-
-	public String dispatchAsyncJob(String actorid, Object msg) {
-		ActorRef tmp = (actorRefTable.get(actorid)).getActorref();
-		if (tmp != null) {
-			tmp.tell(msg, asyncActor);
-			return tmp.toString();
-		} else {
-			return "0";
-		}
+	public String dispatchAsyncJob(String actorId, Object msg) throws Exception {
+		AsyncMailboxActorJobMsg jobMsg = new AsyncMailboxActorJobMsg(actorId,
+				msg);
+		Timeout timeout = new Timeout(Duration.create(7, "seconds"));
+		Future<Object> future = Patterns.ask(asyncActor, msg, timeout);
+		jobMsg = (AsyncMailboxActorJobMsg) Await.result(future,
+				timeout.duration());
+		return jobMsg.getActorId();
 	}
 
 	public Object getAsyncJobresult(String sourceactor) {

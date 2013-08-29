@@ -78,9 +78,13 @@ public class WebServiceAccess {
 	@WebResult(name = "resultmessage")
 	public byte[] getAsyncJobresult(@WebParam(name = "jobid") String jobid)
 			throws ServerFault {
+		Object tmp = actorenv.getAsyncJobresult(jobid);
 		try {
-			return SerializationHelper.serialize(actorenv
-					.getAsyncJobresult(jobid));
+			if (tmp != null) {
+				return SerializationHelper.serialize(tmp);
+			} else {
+				throw new ServerFault("No message");
+			}
 		} catch (Exception e) {
 			logger.warning("getAsyncJobresult failed! Error: " + e.getMessage());
 			throw new ServerFault(e.getMessage());

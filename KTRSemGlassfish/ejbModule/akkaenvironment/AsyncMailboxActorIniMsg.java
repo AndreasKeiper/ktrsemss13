@@ -2,18 +2,22 @@ package akkaenvironment;
 
 import java.util.concurrent.ConcurrentHashMap;
 
+import akkaenvironment.wrapper.ActorRefTimeWrapper;
 import akkaenvironment.wrapper.JobTimeWrapper;
 
 public class AsyncMailboxActorIniMsg {
 
+	private ConcurrentHashMap<String, ActorRefTimeWrapper> actorRefTable;
 	private ConcurrentHashMap<String, JobTimeWrapper> jobsTable;
 	private long storageTime;
 
 	public AsyncMailboxActorIniMsg(
 			ConcurrentHashMap<String, JobTimeWrapper> jobstable,
+			ConcurrentHashMap<String, ActorRefTimeWrapper> actorRefTable,
 			long storagetime) {
 		this.jobsTable = jobstable;
 		this.storageTime = storagetime;
+		this.actorRefTable = actorRefTable;
 	}
 
 	public String toString() {
@@ -22,6 +26,10 @@ public class AsyncMailboxActorIniMsg {
 
 	public ConcurrentHashMap<String, JobTimeWrapper> getJobstable() {
 		return jobsTable;
+	}
+
+	public ConcurrentHashMap<String, ActorRefTimeWrapper> getActorRefTable() {
+		return actorRefTable;
 	}
 
 	public long getStorageTime() {
