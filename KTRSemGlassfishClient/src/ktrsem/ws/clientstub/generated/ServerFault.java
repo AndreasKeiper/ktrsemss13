@@ -7,16 +7,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for generateActorIndirectlyResponse complex type.
+ * <p>Java class for ServerFault complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="generateActorIndirectlyResponse">
+ * &lt;complexType name="ServerFault">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="actorid" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="message" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -26,35 +26,35 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "generateActorIndirectlyResponse", propOrder = {
-    "actorid"
+@XmlType(name = "ServerFault", propOrder = {
+    "message"
 })
-public class GenerateActorIndirectlyResponse {
+public class ServerFault {
 
-    protected String actorid;
+    protected String message;
 
     /**
-     * Gets the value of the actorid property.
+     * Gets the value of the message property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getActorid() {
-        return actorid;
+    public String getMessage() {
+        return message;
     }
 
     /**
-     * Sets the value of the actorid property.
+     * Sets the value of the message property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setActorid(String value) {
-        this.actorid = value;
+    public void setMessage(String value) {
+        this.message = value;
     }
 
 }

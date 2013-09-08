@@ -34,7 +34,7 @@ public class Actorenvironment {
 	private ConcurrentHashMap<String, JobTimeWrapper> jobsTable;
 	private ConcurrentHashMap<String, PropsPreAvailableWrapper> actorPreTable;
 	private ActorRef asyncActor;
-	private long storageTime = 60000;
+	private long storageTime = 600000;
 
 	public Actorenvironment() {
 
@@ -57,6 +57,7 @@ public class Actorenvironment {
 	}
 
 	public String generateActorFromProps(Props props) {
+		cleanup();
 		ActorRef actor = actorsys.actorOf(props);
 		ActorRefTimeWrapper tmp = new ActorRefTimeWrapper(actor,
 				(System.currentTimeMillis() + storageTime));
@@ -89,7 +90,7 @@ public class Actorenvironment {
 		return jobMsg.getActorId();
 	}
 
-	public Object getAsyncJobresult(String sourceactor) {
+	public Object getAsyncJobResult(String sourceactor) {
 		JobTimeWrapper tmp = jobsTable.get(sourceactor);
 		if (tmp != null) {
 			return tmp.getResultMsg();
@@ -120,7 +121,8 @@ public class Actorenvironment {
 		return actorPreTable;
 	}
 
-	public String generateActorfromPreProps(String propsid) {
+	public String generateActorFromPreProps(String propsid) {
+		cleanup();
 		ActorRef actor = actorsys
 				.actorOf(actorPreTable.get(propsid).getProps());
 		actorRefTable.put(actor.toString(), new ActorRefTimeWrapper(actor,

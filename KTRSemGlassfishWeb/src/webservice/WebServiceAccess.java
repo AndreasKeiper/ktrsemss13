@@ -78,7 +78,7 @@ public class WebServiceAccess {
 	@WebResult(name = "resultmessage")
 	public byte[] getAsyncJobresult(@WebParam(name = "jobid") String jobid)
 			throws ServerFault {
-		Object tmp = actorenv.getAsyncJobresult(jobid);
+		Object tmp = actorenv.getAsyncJobResult(jobid);
 		try {
 			if (tmp != null) {
 				return SerializationHelper.serialize(tmp);
@@ -108,7 +108,7 @@ public class WebServiceAccess {
 	public String generatePreAvailableActor(
 			@WebParam(name = "propsid") String propsid) throws ServerFault {
 		try {
-			return actorenv.generateActorfromPreProps(propsid);
+			return actorenv.generateActorFromPreProps(propsid);
 		} catch (Exception e) {
 			logger.warning("generatePreAvailableActor failed! Error: "
 					+ e.getMessage());

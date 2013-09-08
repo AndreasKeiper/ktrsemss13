@@ -9,12 +9,12 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for addPropsOnly complex type.
+ * <p>Java class for generateActorFromProps complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="addPropsOnly">
+ * &lt;complexType name="generateActorFromProps">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
@@ -28,10 +28,10 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "addPropsOnly", propOrder = {
+@XmlType(name = "generateActorFromProps", propOrder = {
     "props"
 })
-public class AddPropsOnly {
+public class GenerateActorFromProps {
 
     @XmlElementRef(name = "props", type = JAXBElement.class, required = false)
     protected JAXBElement<byte[]> props;

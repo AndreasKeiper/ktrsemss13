@@ -24,27 +24,21 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _AddPropsOnlyProps_QNAME = new QName("", "props");
-    private final static QName _GenerateActorDirectlyResponse_QNAME = new QName("http://webservice/", "generateActorDirectlyResponse");
     private final static QName _DispatchAsyncJobResponse_QNAME = new QName("http://webservice/", "dispatchAsyncJobResponse");
-    private final static QName _GenerateActorIndirectlyResponse_QNAME = new QName("http://webservice/", "generateActorIndirectlyResponse");
-    private final static QName _AddPropsOnlyResponse_QNAME = new QName("http://webservice/", "addPropsOnlyResponse");
     private final static QName _GetPreAvailablePropsResponse_QNAME = new QName("http://webservice/", "getPreAvailablePropsResponse");
-    private final static QName _DefineOwnClassResponse_QNAME = new QName("http://webservice/", "defineOwnClassResponse");
     private final static QName _GetAsyncJobresultResponse_QNAME = new QName("http://webservice/", "getAsyncJobresultResponse");
+    private final static QName _GenerateActorFromPropsResponse_QNAME = new QName("http://webservice/", "generateActorFromPropsResponse");
     private final static QName _GeneratePreAvailableActor_QNAME = new QName("http://webservice/", "generatePreAvailableActor");
-    private final static QName _AddPropsOnly_QNAME = new QName("http://webservice/", "addPropsOnly");
     private final static QName _GeneratePreAvailableActorResponse_QNAME = new QName("http://webservice/", "generatePreAvailableActorResponse");
-    private final static QName _GenerateActorIndirectly_QNAME = new QName("http://webservice/", "generateActorIndirectly");
-    private final static QName _GenerateActorDirectly_QNAME = new QName("http://webservice/", "generateActorDirectly");
-    private final static QName _SendMessageResponse_QNAME = new QName("http://webservice/", "sendMessageResponse");
+    private final static QName _GenerateActorFromProps_QNAME = new QName("http://webservice/", "generateActorFromProps");
     private final static QName _GetPreAvailableProps_QNAME = new QName("http://webservice/", "getPreAvailableProps");
+    private final static QName _SendMessageResponse_QNAME = new QName("http://webservice/", "sendMessageResponse");
     private final static QName _SendMessage_QNAME = new QName("http://webservice/", "sendMessage");
+    private final static QName _ServerFault_QNAME = new QName("http://webservice/", "serverFault");
     private final static QName _DispatchAsyncJob_QNAME = new QName("http://webservice/", "dispatchAsyncJob");
-    private final static QName _DefineOwnClass_QNAME = new QName("http://webservice/", "defineOwnClass");
     private final static QName _GetAsyncJobresult_QNAME = new QName("http://webservice/", "getAsyncJobresult");
-    private final static QName _GetAsyncJobresultResponseResultmessage_QNAME = new QName("", "resultmessage");
-    private final static QName _DefineOwnClassOwnclass_QNAME = new QName("", "ownclass");
+    private final static QName _GenerateActorFromPropsProps_QNAME = new QName("", "props");
+    private final static QName _SendMessageResponseResultmessage_QNAME = new QName("", "resultmessage");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: ktrsem.ws.clientstub.generated
@@ -62,11 +56,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DefineOwnClassResponse }
+     * Create an instance of {@link GenerateActorFromPropsResponse }
      * 
      */
-    public DefineOwnClassResponse createDefineOwnClassResponse() {
-        return new DefineOwnClassResponse();
+    public GenerateActorFromPropsResponse createGenerateActorFromPropsResponse() {
+        return new GenerateActorFromPropsResponse();
     }
 
     /**
@@ -86,43 +80,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GenerateActorIndirectlyResponse }
-     * 
-     */
-    public GenerateActorIndirectlyResponse createGenerateActorIndirectlyResponse() {
-        return new GenerateActorIndirectlyResponse();
-    }
-
-    /**
-     * Create an instance of {@link GenerateActorDirectlyResponse }
-     * 
-     */
-    public GenerateActorDirectlyResponse createGenerateActorDirectlyResponse() {
-        return new GenerateActorDirectlyResponse();
-    }
-
-    /**
-     * Create an instance of {@link AddPropsOnlyResponse }
-     * 
-     */
-    public AddPropsOnlyResponse createAddPropsOnlyResponse() {
-        return new AddPropsOnlyResponse();
-    }
-
-    /**
      * Create an instance of {@link GeneratePreAvailableActorResponse }
      * 
      */
     public GeneratePreAvailableActorResponse createGeneratePreAvailableActorResponse() {
         return new GeneratePreAvailableActorResponse();
-    }
-
-    /**
-     * Create an instance of {@link AddPropsOnly }
-     * 
-     */
-    public AddPropsOnly createAddPropsOnly() {
-        return new AddPropsOnly();
     }
 
     /**
@@ -142,14 +104,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link SendMessageResponse }
-     * 
-     */
-    public SendMessageResponse createSendMessageResponse() {
-        return new SendMessageResponse();
-    }
-
-    /**
      * Create an instance of {@link GetPreAvailableProps }
      * 
      */
@@ -158,27 +112,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GenerateActorIndirectly }
+     * Create an instance of {@link SendMessageResponse }
      * 
      */
-    public GenerateActorIndirectly createGenerateActorIndirectly() {
-        return new GenerateActorIndirectly();
+    public SendMessageResponse createSendMessageResponse() {
+        return new SendMessageResponse();
     }
 
     /**
-     * Create an instance of {@link GenerateActorDirectly }
+     * Create an instance of {@link GenerateActorFromProps }
      * 
      */
-    public GenerateActorDirectly createGenerateActorDirectly() {
-        return new GenerateActorDirectly();
-    }
-
-    /**
-     * Create an instance of {@link DefineOwnClass }
-     * 
-     */
-    public DefineOwnClass createDefineOwnClass() {
-        return new DefineOwnClass();
+    public GenerateActorFromProps createGenerateActorFromProps() {
+        return new GenerateActorFromProps();
     }
 
     /**
@@ -187,6 +133,14 @@ public class ObjectFactory {
      */
     public GetAsyncJobresult createGetAsyncJobresult() {
         return new GetAsyncJobresult();
+    }
+
+    /**
+     * Create an instance of {@link ServerFault }
+     * 
+     */
+    public ServerFault createServerFault() {
+        return new ServerFault();
     }
 
     /**
@@ -222,48 +176,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "", name = "props", scope = AddPropsOnly.class)
-    public JAXBElement<byte[]> createAddPropsOnlyProps(byte[] value) {
-        return new JAXBElement<byte[]>(_AddPropsOnlyProps_QNAME, byte[].class, AddPropsOnly.class, ((byte[]) value));
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GenerateActorDirectlyResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservice/", name = "generateActorDirectlyResponse")
-    public JAXBElement<GenerateActorDirectlyResponse> createGenerateActorDirectlyResponse(GenerateActorDirectlyResponse value) {
-        return new JAXBElement<GenerateActorDirectlyResponse>(_GenerateActorDirectlyResponse_QNAME, GenerateActorDirectlyResponse.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link DispatchAsyncJobResponse }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://webservice/", name = "dispatchAsyncJobResponse")
     public JAXBElement<DispatchAsyncJobResponse> createDispatchAsyncJobResponse(DispatchAsyncJobResponse value) {
         return new JAXBElement<DispatchAsyncJobResponse>(_DispatchAsyncJobResponse_QNAME, DispatchAsyncJobResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GenerateActorIndirectlyResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservice/", name = "generateActorIndirectlyResponse")
-    public JAXBElement<GenerateActorIndirectlyResponse> createGenerateActorIndirectlyResponse(GenerateActorIndirectlyResponse value) {
-        return new JAXBElement<GenerateActorIndirectlyResponse>(_GenerateActorIndirectlyResponse_QNAME, GenerateActorIndirectlyResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link AddPropsOnlyResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservice/", name = "addPropsOnlyResponse")
-    public JAXBElement<AddPropsOnlyResponse> createAddPropsOnlyResponse(AddPropsOnlyResponse value) {
-        return new JAXBElement<AddPropsOnlyResponse>(_AddPropsOnlyResponse_QNAME, AddPropsOnlyResponse.class, null, value);
     }
 
     /**
@@ -276,21 +194,21 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link DefineOwnClassResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservice/", name = "defineOwnClassResponse")
-    public JAXBElement<DefineOwnClassResponse> createDefineOwnClassResponse(DefineOwnClassResponse value) {
-        return new JAXBElement<DefineOwnClassResponse>(_DefineOwnClassResponse_QNAME, DefineOwnClassResponse.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetAsyncJobresultResponse }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://webservice/", name = "getAsyncJobresultResponse")
     public JAXBElement<GetAsyncJobresultResponse> createGetAsyncJobresultResponse(GetAsyncJobresultResponse value) {
         return new JAXBElement<GetAsyncJobresultResponse>(_GetAsyncJobresultResponse_QNAME, GetAsyncJobresultResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GenerateActorFromPropsResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice/", name = "generateActorFromPropsResponse")
+    public JAXBElement<GenerateActorFromPropsResponse> createGenerateActorFromPropsResponse(GenerateActorFromPropsResponse value) {
+        return new JAXBElement<GenerateActorFromPropsResponse>(_GenerateActorFromPropsResponse_QNAME, GenerateActorFromPropsResponse.class, null, value);
     }
 
     /**
@@ -303,15 +221,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link AddPropsOnly }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservice/", name = "addPropsOnly")
-    public JAXBElement<AddPropsOnly> createAddPropsOnly(AddPropsOnly value) {
-        return new JAXBElement<AddPropsOnly>(_AddPropsOnly_QNAME, AddPropsOnly.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GeneratePreAvailableActorResponse }{@code >}}
      * 
      */
@@ -321,30 +230,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GenerateActorIndirectly }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GenerateActorFromProps }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://webservice/", name = "generateActorIndirectly")
-    public JAXBElement<GenerateActorIndirectly> createGenerateActorIndirectly(GenerateActorIndirectly value) {
-        return new JAXBElement<GenerateActorIndirectly>(_GenerateActorIndirectly_QNAME, GenerateActorIndirectly.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GenerateActorDirectly }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservice/", name = "generateActorDirectly")
-    public JAXBElement<GenerateActorDirectly> createGenerateActorDirectly(GenerateActorDirectly value) {
-        return new JAXBElement<GenerateActorDirectly>(_GenerateActorDirectly_QNAME, GenerateActorDirectly.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link SendMessageResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservice/", name = "sendMessageResponse")
-    public JAXBElement<SendMessageResponse> createSendMessageResponse(SendMessageResponse value) {
-        return new JAXBElement<SendMessageResponse>(_SendMessageResponse_QNAME, SendMessageResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://webservice/", name = "generateActorFromProps")
+    public JAXBElement<GenerateActorFromProps> createGenerateActorFromProps(GenerateActorFromProps value) {
+        return new JAXBElement<GenerateActorFromProps>(_GenerateActorFromProps_QNAME, GenerateActorFromProps.class, null, value);
     }
 
     /**
@@ -357,6 +248,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SendMessageResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice/", name = "sendMessageResponse")
+    public JAXBElement<SendMessageResponse> createSendMessageResponse(SendMessageResponse value) {
+        return new JAXBElement<SendMessageResponse>(_SendMessageResponse_QNAME, SendMessageResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link SendMessage }{@code >}}
      * 
      */
@@ -366,21 +266,21 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ServerFault }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservice/", name = "serverFault")
+    public JAXBElement<ServerFault> createServerFault(ServerFault value) {
+        return new JAXBElement<ServerFault>(_ServerFault_QNAME, ServerFault.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link DispatchAsyncJob }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://webservice/", name = "dispatchAsyncJob")
     public JAXBElement<DispatchAsyncJob> createDispatchAsyncJob(DispatchAsyncJob value) {
         return new JAXBElement<DispatchAsyncJob>(_DispatchAsyncJob_QNAME, DispatchAsyncJob.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link DefineOwnClass }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://webservice/", name = "defineOwnClass")
-    public JAXBElement<DefineOwnClass> createDefineOwnClass(DefineOwnClass value) {
-        return new JAXBElement<DefineOwnClass>(_DefineOwnClass_QNAME, DefineOwnClass.class, null, value);
     }
 
     /**
@@ -396,18 +296,9 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "", name = "props", scope = GenerateActorDirectly.class)
-    public JAXBElement<byte[]> createGenerateActorDirectlyProps(byte[] value) {
-        return new JAXBElement<byte[]>(_AddPropsOnlyProps_QNAME, byte[].class, GenerateActorDirectly.class, ((byte[]) value));
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "", name = "resultmessage", scope = GetAsyncJobresultResponse.class)
-    public JAXBElement<byte[]> createGetAsyncJobresultResponseResultmessage(byte[] value) {
-        return new JAXBElement<byte[]>(_GetAsyncJobresultResponseResultmessage_QNAME, byte[].class, GetAsyncJobresultResponse.class, ((byte[]) value));
+    @XmlElementDecl(namespace = "", name = "props", scope = GenerateActorFromProps.class)
+    public JAXBElement<byte[]> createGenerateActorFromPropsProps(byte[] value) {
+        return new JAXBElement<byte[]>(_GenerateActorFromPropsProps_QNAME, byte[].class, GenerateActorFromProps.class, ((byte[]) value));
     }
 
     /**
@@ -416,16 +307,16 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "", name = "resultmessage", scope = SendMessageResponse.class)
     public JAXBElement<byte[]> createSendMessageResponseResultmessage(byte[] value) {
-        return new JAXBElement<byte[]>(_GetAsyncJobresultResponseResultmessage_QNAME, byte[].class, SendMessageResponse.class, ((byte[]) value));
+        return new JAXBElement<byte[]>(_SendMessageResponseResultmessage_QNAME, byte[].class, SendMessageResponse.class, ((byte[]) value));
     }
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "", name = "ownclass", scope = DefineOwnClass.class)
-    public JAXBElement<byte[]> createDefineOwnClassOwnclass(byte[] value) {
-        return new JAXBElement<byte[]>(_DefineOwnClassOwnclass_QNAME, byte[].class, DefineOwnClass.class, ((byte[]) value));
+    @XmlElementDecl(namespace = "", name = "resultmessage", scope = GetAsyncJobresultResponse.class)
+    public JAXBElement<byte[]> createGetAsyncJobresultResponseResultmessage(byte[] value) {
+        return new JAXBElement<byte[]>(_SendMessageResponseResultmessage_QNAME, byte[].class, GetAsyncJobresultResponse.class, ((byte[]) value));
     }
 
 }
