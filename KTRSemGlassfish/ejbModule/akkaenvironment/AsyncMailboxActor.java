@@ -1,9 +1,9 @@
 package akkaenvironment;
 
 import java.util.Collection;
-import java.util.Hashtable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.logging.Logger;
 
 import akka.actor.ActorRef;
 import akka.actor.UntypedActor;
@@ -12,20 +12,20 @@ import akkaenvironment.wrapper.JobTimeWrapper;
 
 public class AsyncMailboxActor extends UntypedActor {
 
+	Logger logger = Logger.getLogger(AsyncMailboxActor.class.getName());
 	private ConcurrentHashMap<String, ActorRefTimeWrapper> actorRefTable;
 	private ConcurrentHashMap<String, JobTimeWrapper> jobsTable;
-	private Hashtable<String, ConcurrentLinkedQueue<JobTimeWrapper>> openJobs;
+	private ConcurrentHashMap<String, ConcurrentLinkedQueue<JobTimeWrapper>> openJobs = new ConcurrentHashMap<>();
 	private long storageTime;
 
 	@Override
 	public void onReceive(Object arg0) throws Exception {
-
 		if (arg0.toString().equals("Init")) {
 			initMsgReceived(arg0);
 		} else if (arg0.toString().equals("JobMsg")) {
 			jobMsgReceived(arg0);
 		} else {
-			resultMsgReceived();
+			resultMsgReceived(arg0);
 		}
 	}
 
@@ -39,22 +39,31 @@ public class AsyncMailboxActor extends UntypedActor {
 	private void jobMsgReceived(Object msg) {
 		cleanUp();
 		AsyncMailboxActorJobMsg jobMsg = (AsyncMailboxActorJobMsg) msg;
+
 		ActorRef receiver = (actorRefTable.get(jobMsg.getActorId()))
 				.getActorref();
+
 		String jobId = jobMsg.getActorId() + System.currentTimeMillis();
+
 		if (receiver != null) {
+
 			JobTimeWrapper openJobResult = new JobTimeWrapper(jobId,
 					jobMsg.getMsg(), (System.currentTimeMillis() + storageTime));
-			receiver.tell(jobMsg.getMsg(), getSelf());
+
 			ConcurrentLinkedQueue<JobTimeWrapper> tmpqueue = openJobs
 					.get(jobMsg.getActorId());
+
 			if (tmpqueue != null) {
+
 				tmpqueue.add(openJobResult);
+
 			} else {
+
 				tmpqueue = new ConcurrentLinkedQueue<JobTimeWrapper>();
 				tmpqueue.add(openJobResult);
 				openJobs.put(jobMsg.getActorId(), tmpqueue);
 			}
+
 			jobMsg.setActorId(jobId);
 			getSender().tell(jobMsg, getSelf());
 		} else {
@@ -63,9 +72,10 @@ public class AsyncMailboxActor extends UntypedActor {
 			jobMsg.setActorId(null);
 			getSender().tell(jobMsg, getSelf());
 		}
+		receiver.tell(jobMsg.getMsg(), getSelf());
 	}
 
-	private void resultMsgReceived() {
+	private void resultMsgReceived(Object msg) {
 		JobTimeWrapper result = openJobs.get(getSender().toString()).poll();
 		result.setTimeout(System.currentTimeMillis() + storageTime);
 		jobsTable.put(result.getJobId(), result);

@@ -83,15 +83,15 @@ public class Actorenvironment {
 	public String dispatchAsyncJob(String actorId, Object msg) throws Exception {
 		AsyncMailboxActorJobMsg jobMsg = new AsyncMailboxActorJobMsg(actorId,
 				msg);
-		Timeout timeout = new Timeout(Duration.create(7, "seconds"));
-		Future<Object> future = Patterns.ask(asyncActor, msg, timeout);
+		Timeout timeout = new Timeout(Duration.create(3, "seconds"));
+		Future<Object> future = Patterns.ask(asyncActor, jobMsg, timeout);
 		jobMsg = (AsyncMailboxActorJobMsg) Await.result(future,
 				timeout.duration());
 		return jobMsg.getActorId();
 	}
 
-	public Object getAsyncJobResult(String sourceactor) {
-		JobTimeWrapper tmp = jobsTable.get(sourceactor);
+	public Object getAsyncJobResult(String jobId) {
+		JobTimeWrapper tmp = jobsTable.remove(jobId);
 		if (tmp != null) {
 			return tmp.getResultMsg();
 		} else {

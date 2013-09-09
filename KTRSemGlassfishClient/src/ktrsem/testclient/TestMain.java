@@ -23,11 +23,16 @@ public class TestMain {
 	public static void main(String[] args) {
 
 		TestMain test = new TestMain();
-		test.testgetPreAvailableProps();
-		test.testgenerateActorFromProps();
-		test.testgeneratePreAvailableActor();
-		test.testsendMessage();
-		test.testdispatchAsyncJob();
+		String result = test.testdispatchAsyncJob();
+
+		try {
+			Thread.currentThread().sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		test.testgetAsyncJobResult(result);
 	}
 
 	// works
@@ -124,7 +129,7 @@ public class TestMain {
 	}
 
 	// works
-	public void testdispatchAsyncJob() {
+	public String testdispatchAsyncJob() {
 
 		List<PropsPreAvailableMessage> tmp = stub.getPreAvailableProps();
 		List<String> actorids = new ArrayList<>();
@@ -140,6 +145,7 @@ public class TestMain {
 		for (String actorid : actorids) {
 			System.out.println(actorid);
 		}
+
 		byte[] req = null;
 		try {
 			req = SerializationHelper.serialize(new TestMessage(testmsg));
@@ -151,7 +157,8 @@ public class TestMain {
 		JobMessageAsync msg = new JobMessageAsync();
 		msg.setActorid(actorids.get(0));
 		msg.setMessage(req);
-		TestMessage resp = null;
+
+		System.out.println(msg.getActorid());
 
 		String jobid = "dispatch asynchjob failed!";
 		try {
@@ -160,23 +167,21 @@ public class TestMain {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		System.out.println(jobid);
+		return jobid;
+	}
 
+	public void testgetAsyncJobResult(String jobId) {
+		TestMessage resp = null;
 		try {
 			resp = (TestMessage) SerializationHelper.deserialize(stub
-					.getAsyncJobresult(jobid));
+					.getAsyncJobresult(jobId));
 		} catch (ClassNotFoundException | IOException | ServerFault_Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		System.out.println(resp.getContent());
-
 	}
 
 }
