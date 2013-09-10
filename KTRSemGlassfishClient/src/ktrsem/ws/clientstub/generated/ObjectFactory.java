@@ -37,8 +37,8 @@ public class ObjectFactory {
     private final static QName _ServerFault_QNAME = new QName("http://webservice/", "serverFault");
     private final static QName _DispatchAsyncJob_QNAME = new QName("http://webservice/", "dispatchAsyncJob");
     private final static QName _GetAsyncJobresult_QNAME = new QName("http://webservice/", "getAsyncJobresult");
+    private final static QName _GetAsyncJobresultResponseResultmessage_QNAME = new QName("", "resultmessage");
     private final static QName _GenerateActorFromPropsProps_QNAME = new QName("", "props");
-    private final static QName _SendMessageResponseResultmessage_QNAME = new QName("", "resultmessage");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: ktrsem.ws.clientstub.generated
@@ -296,9 +296,9 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "", name = "props", scope = GenerateActorFromProps.class)
-    public JAXBElement<byte[]> createGenerateActorFromPropsProps(byte[] value) {
-        return new JAXBElement<byte[]>(_GenerateActorFromPropsProps_QNAME, byte[].class, GenerateActorFromProps.class, ((byte[]) value));
+    @XmlElementDecl(namespace = "", name = "resultmessage", scope = GetAsyncJobresultResponse.class)
+    public JAXBElement<byte[]> createGetAsyncJobresultResponseResultmessage(byte[] value) {
+        return new JAXBElement<byte[]>(_GetAsyncJobresultResponseResultmessage_QNAME, byte[].class, GetAsyncJobresultResponse.class, ((byte[]) value));
     }
 
     /**
@@ -307,16 +307,16 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "", name = "resultmessage", scope = SendMessageResponse.class)
     public JAXBElement<byte[]> createSendMessageResponseResultmessage(byte[] value) {
-        return new JAXBElement<byte[]>(_SendMessageResponseResultmessage_QNAME, byte[].class, SendMessageResponse.class, ((byte[]) value));
+        return new JAXBElement<byte[]>(_GetAsyncJobresultResponseResultmessage_QNAME, byte[].class, SendMessageResponse.class, ((byte[]) value));
     }
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "", name = "resultmessage", scope = GetAsyncJobresultResponse.class)
-    public JAXBElement<byte[]> createGetAsyncJobresultResponseResultmessage(byte[] value) {
-        return new JAXBElement<byte[]>(_SendMessageResponseResultmessage_QNAME, byte[].class, GetAsyncJobresultResponse.class, ((byte[]) value));
+    @XmlElementDecl(namespace = "", name = "props", scope = GenerateActorFromProps.class)
+    public JAXBElement<byte[]> createGenerateActorFromPropsProps(byte[] value) {
+        return new JAXBElement<byte[]>(_GenerateActorFromPropsProps_QNAME, byte[].class, GenerateActorFromProps.class, ((byte[]) value));
     }
 
 }

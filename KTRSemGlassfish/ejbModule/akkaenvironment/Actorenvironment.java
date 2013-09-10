@@ -126,7 +126,7 @@ public class Actorenvironment {
 		ActorRef actor = actorsys
 				.actorOf(actorPreTable.get(propsid).getProps());
 		actorRefTable.put(actor.toString(), new ActorRefTimeWrapper(actor,
-				storageTime));
+				System.currentTimeMillis() + storageTime));
 		return actor.toString();
 	}
 

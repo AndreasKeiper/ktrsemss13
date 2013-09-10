@@ -33,7 +33,10 @@ public class WebServiceAccess {
 			throws ServerFault {
 		try {
 			Props tmp = (Props) SerializationHelper.deserialize(props);
-			return actorenv.generateActorFromProps(tmp);
+			String actor = actorenv.generateActorFromProps(tmp);
+			logger.info("Actor created from Props: " + actor);
+			return actor;
+
 		} catch (Exception e) {
 			logger.warning("Direct actor generation failed! Error: "
 					+ e.getMessage());
@@ -48,8 +51,9 @@ public class WebServiceAccess {
 		String actorid = msg.getActorid();
 		int waittime = msg.getWaittime();
 		byte[] content = msg.getMsg();
-
+		logger.info("sendMessage to actor: " + actorid);
 		try {
+
 			Object msgobj = (Object) SerializationHelper.deserialize(content);
 			Object respobj = actorenv.sendMessage(actorid, msgobj, waittime);
 			return SerializationHelper.serialize(respobj);
@@ -108,7 +112,9 @@ public class WebServiceAccess {
 	public String generatePreAvailableActor(
 			@WebParam(name = "propsid") String propsid) throws ServerFault {
 		try {
-			return actorenv.generateActorFromPreProps(propsid);
+			String tmp = actorenv.generateActorFromPreProps(propsid);
+			logger.info("Preavailable actor created: " + tmp);
+			return tmp;
 		} catch (Exception e) {
 			logger.warning("generatePreAvailableActor failed! Error: "
 					+ e.getMessage());

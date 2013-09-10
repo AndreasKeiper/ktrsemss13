@@ -101,7 +101,8 @@ public class WebServiceAccessStub implements WebServiceAccess {
 	public byte[] sendMessage(
 			@WebParam(name = "jobmessage", targetNamespace = "") JobMessage jobmessage)
 			throws ServerFault_Exception {
-		return proxy.sendMessage(jobmessage);
+		byte[] tmp = proxy.sendMessage(jobmessage);
+		return tmp;
 	}
 
 }

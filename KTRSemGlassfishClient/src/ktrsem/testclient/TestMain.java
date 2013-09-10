@@ -20,168 +20,152 @@ public class TestMain {
 	private WebServiceAccessStub stub = new WebServiceAccessStub();
 	private String testmsg = "lkasödlfjpowierlksdjfölaskdjfpoiwerksdjfaölsdjfpoweiru";
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException,
+			IOException, ServerFault_Exception {
 
 		TestMain test = new TestMain();
-		String result = test.testdispatchAsyncJob();
 
+		test.finaltest();
+
+	}
+
+	public void finaltest() throws IOException, ClassNotFoundException,
+			ServerFault_Exception {
+		String preavailable = null;
+		String perprops = null;
+		String jobid = null;
+
+		testgetPreAvailableProps();
+
+		preavailable = testgeneratePreAvailableActor();
+
+		perprops = testgenerateActorFromProps();
+
+		testsendMessage(preavailable);
+
+		jobid = testdispatchAsyncJob(preavailable);
+
+		testgetAsyncJobResult(jobid);
+		System.out.println();
+		System.out.println("All Tests are finished.");
+
+	}
+
+	public String testsendMessage(String actorid) throws ServerFault_Exception,
+			ClassNotFoundException, IOException {
+
+		System.out.println();
+		System.out.println("Test of Method: sendMessage");
+		System.out.println("======================================");
+		System.out.println("Sending String: " + testmsg + " to actor: "
+				+ actorid);
+
+		TestMessage msg = new TestMessage(testmsg);
+		JobMessage jobmsg = new JobMessage();
+		jobmsg.setActorid(actorid);
+		jobmsg.setWaittime(10000);
+		jobmsg.setMessage(SerializationHelper.serialize(msg));
+
+		byte[] tmpresp = stub.sendMessage(jobmsg);
+
+		TestMessage resp = (TestMessage) SerializationHelper
+				.deserialize(tmpresp);
+		String syncresult = resp.getContent();
+		System.out.println("Received String: " + syncresult);
+
+		return syncresult;
+
+	}
+
+	public void testgetPreAvailableProps() {
+		System.out.println("Test of Method: getPreAvailableProps");
+		System.out.println("====================================");
+		System.out.println("The following actors are available:");
+		List<PropsPreAvailableMessage> tmp = stub.getPreAvailableProps();
+		for (PropsPreAvailableMessage msg : tmp) {
+			System.out.println(msg.getActorname());
+		}
+
+	}
+
+	public String testgeneratePreAvailableActor() throws ServerFault_Exception {
+		System.out.println();
+		System.out.println("Test of Method: generatePreAvailableActor");
+		System.out.println("=========================================");
+		List<PropsPreAvailableMessage> tmp = stub.getPreAvailableProps();
+		List<String> actorids = new ArrayList<>();
+		for (PropsPreAvailableMessage msg : tmp) {
+			System.out.println(msg.getActorname());
+
+			actorids.add(stub.generatePreAvailableActor(msg.getActorname()));
+
+		}
+		System.out.println("Preavailable actor creation successful: "
+				+ actorids.get(0));
+		return actorids.get(0);
+	}
+
+	public String testgenerateActorFromProps() throws IOException,
+			ServerFault_Exception {
+		System.out.println();
+		System.out.println("Test of Method: generateActorFromProps");
+		System.out.println("======================================");
+		byte[] tmp = null;
+
+		tmp = SerializationHelper.serialize(new Props(TestActor.class));
+
+		String actorid = "Actor generation from Props failed!";
+
+		actorid = stub.generateActorFromProps(tmp);
+		System.out.println("Actor creation successful: " + actorid);
+		return actorid;
+
+	}
+
+	public String testdispatchAsyncJob(String actorid) throws IOException,
+			ServerFault_Exception {
+		System.out.println();
+		System.out.println("Test of Method: dispatchAsyncJob");
+		System.out.println("======================================");
+		System.out.println("Sending String: " + testmsg + " to actor: "
+				+ actorid);
+
+		TestMessage msgtosend = new TestMessage(testmsg);
+		byte[] content = SerializationHelper.serialize(msgtosend);
+
+		JobMessageAsync asyncmsg = new JobMessageAsync();
+		asyncmsg.setActorid(actorid);
+		asyncmsg.setMessage(content);
+
+		String jobid = stub.dispatchAsyncJob(asyncmsg);
+		System.out.println("Received jobid: " + jobid);
+		System.out.println();
+		System.out.println("Thread sleeps for 3 seconds");
 		try {
-			Thread.currentThread().sleep(1000);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		test.testgetAsyncJobResult(result);
-	}
-
-	// works
-	public void testsendMessage() {
-
-		List<PropsPreAvailableMessage> tmp = stub.getPreAvailableProps();
-		List<String> actorids = new ArrayList<>();
-		for (PropsPreAvailableMessage msg : tmp) {
-			System.out.println(msg.getActorname());
-			try {
-				actorids.add(stub.generatePreAvailableActor(msg.getActorname()));
-			} catch (ServerFault_Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		for (String actorid : actorids) {
-			System.out.println(actorid);
-		}
-		byte[] req = null;
-		try {
-			req = SerializationHelper.serialize(new TestMessage(testmsg));
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		JobMessage msg = new JobMessage();
-		msg.setActorid(actorids.get(0));
-		msg.setMessage(req);
-		msg.setWaittime(10000);
-		TestMessage resp = null;
-
-		try {
-			resp = (TestMessage) SerializationHelper.deserialize(stub
-					.sendMessage(msg));
-		} catch (ClassNotFoundException | IOException | ServerFault_Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		System.out.println(resp.getContent());
-
-	}
-
-	// works
-	public void testgetPreAvailableProps() {
-
-		List<PropsPreAvailableMessage> tmp = stub.getPreAvailableProps();
-		for (PropsPreAvailableMessage msg : tmp) {
-			System.out.println(msg.getActorname());
-		}
-
-	}
-
-	// works
-	public void testgeneratePreAvailableActor() {
-
-		List<PropsPreAvailableMessage> tmp = stub.getPreAvailableProps();
-		List<String> actorids = new ArrayList<>();
-		for (PropsPreAvailableMessage msg : tmp) {
-			System.out.println(msg.getActorname());
-			try {
-				actorids.add(stub.generatePreAvailableActor(msg.getActorname()));
-			} catch (ServerFault_Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		for (String actorid : actorids) {
-			System.out.println(actorid);
-		}
-
-	}
-
-	public void testgenerateActorFromProps() {
-
-		byte[] tmp = null;
-		try {
-			tmp = SerializationHelper.serialize(new Props(TestActor.class));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		String actorid = "Actor generation from Props failed!";
-		try {
-			actorid = stub.generateActorFromProps(tmp);
-		} catch (ServerFault_Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println(actorid);
-
-	}
-
-	// works
-	public String testdispatchAsyncJob() {
-
-		List<PropsPreAvailableMessage> tmp = stub.getPreAvailableProps();
-		List<String> actorids = new ArrayList<>();
-		for (PropsPreAvailableMessage msg : tmp) {
-			System.out.println(msg.getActorname());
-			try {
-				actorids.add(stub.generatePreAvailableActor(msg.getActorname()));
-			} catch (ServerFault_Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		for (String actorid : actorids) {
-			System.out.println(actorid);
-		}
-
-		byte[] req = null;
-		try {
-			req = SerializationHelper.serialize(new TestMessage(testmsg));
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		JobMessageAsync msg = new JobMessageAsync();
-		msg.setActorid(actorids.get(0));
-		msg.setMessage(req);
-
-		System.out.println(msg.getActorid());
-
-		String jobid = "dispatch asynchjob failed!";
-		try {
-			jobid = stub.dispatchAsyncJob(msg);
-		} catch (ServerFault_Exception e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		System.out.println(jobid);
 		return jobid;
 	}
 
-	public void testgetAsyncJobResult(String jobId) {
-		TestMessage resp = null;
-		try {
-			resp = (TestMessage) SerializationHelper.deserialize(stub
-					.getAsyncJobresult(jobId));
-		} catch (ClassNotFoundException | IOException | ServerFault_Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public String testgetAsyncJobResult(String jobId)
+			throws ClassNotFoundException, IOException, ServerFault_Exception {
+		System.out.println();
+		System.out.println("Test of Method: getAsyncJobResult");
+		System.out.println("======================================");
+		System.out.println("Trying to get result from jobid: " + jobId);
 
-		System.out.println(resp.getContent());
+		TestMessage resp = null;
+
+		resp = (TestMessage) SerializationHelper.deserialize(stub
+				.getAsyncJobresult(jobId));
+
+		System.out.println("Received String: " + resp.getContent());
+
+		return resp.getContent();
 	}
 
 }

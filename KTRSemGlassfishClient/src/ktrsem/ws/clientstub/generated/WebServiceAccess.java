@@ -28,46 +28,6 @@ public interface WebServiceAccess {
 
     /**
      * 
-     * @param props
-     * @return
-     *     returns java.lang.String
-     * @throws ServerFault_Exception
-     */
-    @WebMethod
-    @WebResult(name = "actorid", targetNamespace = "")
-    @RequestWrapper(localName = "generateActorFromProps", targetNamespace = "http://webservice/", className = "ktrsem.ws.clientstub.generated.GenerateActorFromProps")
-    @ResponseWrapper(localName = "generateActorFromPropsResponse", targetNamespace = "http://webservice/", className = "ktrsem.ws.clientstub.generated.GenerateActorFromPropsResponse")
-    @Action(input = "http://webservice/WebServiceAccess/generateActorFromPropsRequest", output = "http://webservice/WebServiceAccess/generateActorFromPropsResponse", fault = {
-        @FaultAction(className = ServerFault_Exception.class, value = "http://webservice/WebServiceAccess/generateActorFromProps/Fault/ServerFault")
-    })
-    public String generateActorFromProps(
-        @WebParam(name = "props", targetNamespace = "")
-        byte[] props)
-        throws ServerFault_Exception
-    ;
-
-    /**
-     * 
-     * @param jobmessageasync
-     * @return
-     *     returns java.lang.String
-     * @throws ServerFault_Exception
-     */
-    @WebMethod
-    @WebResult(name = "jobid", targetNamespace = "")
-    @RequestWrapper(localName = "dispatchAsyncJob", targetNamespace = "http://webservice/", className = "ktrsem.ws.clientstub.generated.DispatchAsyncJob")
-    @ResponseWrapper(localName = "dispatchAsyncJobResponse", targetNamespace = "http://webservice/", className = "ktrsem.ws.clientstub.generated.DispatchAsyncJobResponse")
-    @Action(input = "http://webservice/WebServiceAccess/dispatchAsyncJobRequest", output = "http://webservice/WebServiceAccess/dispatchAsyncJobResponse", fault = {
-        @FaultAction(className = ServerFault_Exception.class, value = "http://webservice/WebServiceAccess/dispatchAsyncJob/Fault/ServerFault")
-    })
-    public String dispatchAsyncJob(
-        @WebParam(name = "jobmessageasync", targetNamespace = "")
-        JobMessageAsync jobmessageasync)
-        throws ServerFault_Exception
-    ;
-
-    /**
-     * 
      * @param jobid
      * @return
      *     returns byte[]
@@ -115,6 +75,46 @@ public interface WebServiceAccess {
     public String generatePreAvailableActor(
         @WebParam(name = "propsid", targetNamespace = "")
         String propsid)
+        throws ServerFault_Exception
+    ;
+
+    /**
+     * 
+     * @param props
+     * @return
+     *     returns java.lang.String
+     * @throws ServerFault_Exception
+     */
+    @WebMethod
+    @WebResult(name = "actorid", targetNamespace = "")
+    @RequestWrapper(localName = "generateActorFromProps", targetNamespace = "http://webservice/", className = "ktrsem.ws.clientstub.generated.GenerateActorFromProps")
+    @ResponseWrapper(localName = "generateActorFromPropsResponse", targetNamespace = "http://webservice/", className = "ktrsem.ws.clientstub.generated.GenerateActorFromPropsResponse")
+    @Action(input = "http://webservice/WebServiceAccess/generateActorFromPropsRequest", output = "http://webservice/WebServiceAccess/generateActorFromPropsResponse", fault = {
+        @FaultAction(className = ServerFault_Exception.class, value = "http://webservice/WebServiceAccess/generateActorFromProps/Fault/ServerFault")
+    })
+    public String generateActorFromProps(
+        @WebParam(name = "props", targetNamespace = "")
+        byte[] props)
+        throws ServerFault_Exception
+    ;
+
+    /**
+     * 
+     * @param jobmessageasync
+     * @return
+     *     returns java.lang.String
+     * @throws ServerFault_Exception
+     */
+    @WebMethod
+    @WebResult(name = "jobid", targetNamespace = "")
+    @RequestWrapper(localName = "dispatchAsyncJob", targetNamespace = "http://webservice/", className = "ktrsem.ws.clientstub.generated.DispatchAsyncJob")
+    @ResponseWrapper(localName = "dispatchAsyncJobResponse", targetNamespace = "http://webservice/", className = "ktrsem.ws.clientstub.generated.DispatchAsyncJobResponse")
+    @Action(input = "http://webservice/WebServiceAccess/dispatchAsyncJobRequest", output = "http://webservice/WebServiceAccess/dispatchAsyncJobResponse", fault = {
+        @FaultAction(className = ServerFault_Exception.class, value = "http://webservice/WebServiceAccess/dispatchAsyncJob/Fault/ServerFault")
+    })
+    public String dispatchAsyncJob(
+        @WebParam(name = "jobmessageasync", targetNamespace = "")
+        JobMessageAsync jobmessageasync)
         throws ServerFault_Exception
     ;
 
