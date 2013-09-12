@@ -69,7 +69,7 @@ public class Actorenvironment {
 			throws Exception {
 		ActorRefTimeWrapper tmp = actorRefTable.get(actorid);
 		if (tmp == null) {
-			return null;
+			throw new Exception("Actor not available.");
 		} else {
 			ActorRef actor = tmp.getActorref();
 			Timeout timeout = new Timeout(Duration.create(waittime, "seconds"));
@@ -87,6 +87,9 @@ public class Actorenvironment {
 		Future<Object> future = Patterns.ask(asyncActor, jobMsg, timeout);
 		jobMsg = (AsyncMailboxActorJobMsg) Await.result(future,
 				timeout.duration());
+		if (jobMsg.getActorId() == null) {
+			throw new Exception("Actor not available.");
+		}
 		return jobMsg.getActorId();
 	}
 
