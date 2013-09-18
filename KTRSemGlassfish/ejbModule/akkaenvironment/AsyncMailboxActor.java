@@ -1,6 +1,7 @@
 package akkaenvironment;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.logging.Logger;
@@ -15,7 +16,7 @@ public class AsyncMailboxActor extends UntypedActor {
 	Logger logger = Logger.getLogger(AsyncMailboxActor.class.getName());
 	private ConcurrentHashMap<String, ActorRefTimeWrapper> actorRefTable;
 	private ConcurrentHashMap<String, JobTimeWrapper> jobsTable;
-	private ConcurrentHashMap<String, ConcurrentLinkedQueue<JobTimeWrapper>> openJobs = new ConcurrentHashMap<>();
+	private HashMap<String, ConcurrentLinkedQueue<JobTimeWrapper>> openJobs = new HashMap<>();
 	private long storageTime;
 
 	@Override
