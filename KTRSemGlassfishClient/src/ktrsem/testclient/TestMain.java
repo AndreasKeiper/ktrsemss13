@@ -43,7 +43,7 @@ public class TestMain {
 
 		testsendMessage(preavailable);
 
-		jobid = testdispatchAsyncJob(preavailable);
+		jobid = testdispatchAsyncJob(perprops);
 
 		testgetAsyncJobResult(jobid);
 		System.out.println();

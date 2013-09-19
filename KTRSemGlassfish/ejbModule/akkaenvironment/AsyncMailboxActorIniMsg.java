@@ -5,6 +5,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import akkaenvironment.wrapper.ActorRefTimeWrapper;
 import akkaenvironment.wrapper.JobTimeWrapper;
 
+/**
+ * Initialisierungsnachricht für die Datenübergabe an AsyncMailboxActor
+ */
 public class AsyncMailboxActorIniMsg {
 
 	private ConcurrentHashMap<String, ActorRefTimeWrapper> actorRefTable;

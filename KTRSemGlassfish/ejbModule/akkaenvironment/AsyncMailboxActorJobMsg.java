@@ -1,5 +1,9 @@
 package akkaenvironment;
 
+/**
+ * Nachricht für die Weiterleitung von asynchronen Nachrichten für die
+ * Verwaltung durch AsyncMailboxActor.
+ */
 public class AsyncMailboxActorJobMsg {
 
 	private String actorId;

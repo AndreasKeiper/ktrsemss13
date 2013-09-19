@@ -2,6 +2,9 @@ package webservice;
 
 import javax.xml.ws.WebFault;
 
+/**
+ * Hilfsexception für die Fehlerübertragung per JAX-WS
+ */
 @WebFault(name = "serverFault")
 public class ServerFault extends Exception {
 

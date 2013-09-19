@@ -19,14 +19,29 @@ import akka.actor.Props;
 import akkaenvironment.Actorenvironment;
 import akkaenvironment.wrapper.PropsPreAvailableWrapper;
 
+/**
+ * Nach JAX-WS annotierte Klasse für die Erzeugung des Webserviceendpunktes.
+ */
 @WebService
 public class WebServiceAccess {
 
+	/**
+	 * Logger
+	 */
 	Logger logger = Logger.getLogger(WebServiceAccess.class.getName());
 
 	@EJB(name = "ejb/Actorenvironment")
 	private Actorenvironment actorenv;
 
+	/**
+	 * Erzeugt eine Aktorinstanz aus einer serialisierten Props-Instanz.
+	 * 
+	 * @param props
+	 *            Serialisierte Props-Instanz
+	 * @return Aktoridentifikationsstring
+	 * @throws ServerFault
+	 *             Wird im Falle eines Fehlers geworfen.
+	 */
 	@WebMethod
 	@WebResult(name = "actorid")
 	public String generateActorFromProps(@WebParam(name = "props") byte[] props)
@@ -44,6 +59,15 @@ public class WebServiceAccess {
 		}
 	}
 
+	/**
+	 * Bearbeitet synchrone Nachrichten.
+	 * 
+	 * @param msg
+	 *            In JobMessage gekapselte Nachricht
+	 * @return Serialisiertes Antwortobjekt
+	 * @throws ServerFault
+	 *             Exception für die die Fehlerübertragung per JAX-WS
+	 */
 	@WebMethod
 	@WebResult(name = "resultmessage")
 	public byte[] sendMessage(@WebParam(name = "jobmessage") JobMessage msg)
@@ -63,6 +87,15 @@ public class WebServiceAccess {
 		}
 	}
 
+	/**
+	 * Bearbeitet asynchrone Nachrichten.
+	 * 
+	 * @param msg
+	 *            In JobMessageAsync gekapselte Nachricht
+	 * @return Postkastenreferenzstring
+	 * @throws ServerFault
+	 *             Exception für die die Fehlerübertragung per JAX-WS
+	 */
 	@WebMethod
 	@WebResult(name = "jobid")
 	public String dispatchAsyncJob(
@@ -78,6 +111,15 @@ public class WebServiceAccess {
 		}
 	}
 
+	/**
+	 * Dient dem Abruf von asynchronen Antworten
+	 * 
+	 * @param jobid
+	 *            Postkastenreferenzstring
+	 * @return Serialisiertes Antwortobjekt
+	 * @throws ServerFault
+	 *             Exception für die die Fehlerübertragung per JAX-WS
+	 */
 	@WebMethod
 	@WebResult(name = "resultmessage")
 	public byte[] getAsyncJobresult(@WebParam(name = "jobid") String jobid)
@@ -95,6 +137,11 @@ public class WebServiceAccess {
 		}
 	}
 
+	/**
+	 * Überträgt die Inhalte von actorPreTable aus Actorenvironment
+	 * 
+	 * @return actorPreTable aus Actorenvironment
+	 */
 	@WebMethod
 	@WebResult(name = "preavailable")
 	public List<PropsPreAvailableMessage> getPreAvailableProps() {
@@ -107,6 +154,16 @@ public class WebServiceAccess {
 		return tmp;
 	}
 
+	/**
+	 * Erzeugt einen Aktor aus den in actorPreTable vorhaltenen Props-Instanzen
+	 * 
+	 * @param propsid
+	 *            Vollqualifizierender Name der Aktorklasse, erhältlich über
+	 *            getActorPreTable()
+	 * @return Aktoridentifikationsstring
+	 * @throws ServerFault
+	 *             Exception für die die Fehlerübertragung per JAX-WS
+	 */
 	@WebMethod
 	@WebResult(name = "actorid")
 	public String generatePreAvailableActor(

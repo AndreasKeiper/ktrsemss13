@@ -3,6 +3,10 @@ package webservice.messages;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+/**
+ * Nachrichtenklasse für die Übertragung Einträgen aus actorPreTable in
+ * Actorenvironment per JAX-WS
+ */
 @XmlType
 public class PropsPreAvailableMessage {
 

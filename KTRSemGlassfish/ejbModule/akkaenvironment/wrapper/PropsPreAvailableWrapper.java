@@ -2,6 +2,9 @@ package akkaenvironment.wrapper;
 
 import akka.actor.Props;
 
+/**
+ * Wrapperklasse um die gekapselten Daten mit einer Verfallszeit zu versehen.
+ */
 public class PropsPreAvailableWrapper {
 
 	private Props props;

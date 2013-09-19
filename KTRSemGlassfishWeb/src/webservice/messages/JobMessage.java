@@ -3,11 +3,25 @@ package webservice.messages;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+/**
+ * Nachrichtenklasse für die Übertragung von synchronen Nachrichten per JAX-WS
+ */
 @XmlType
 public class JobMessage {
 
+	/**
+	 * Identifikationsstring des Zielaktors
+	 */
 	private String actorId;
+
+	/**
+	 * Maximale Wartezeit auf die synchrone Antwort
+	 */
 	private int waitTime;
+
+	/**
+	 * Serialisiertes Nachrichtenobjekt
+	 */
 	private byte[] msg;
 
 	public JobMessage() {

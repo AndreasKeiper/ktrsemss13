@@ -1,12 +1,15 @@
 package helper;
 
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+/**
+ * Hilfsklasse mit Methoden für Serialisierung und Deserialisierung von
+ * Objektinstanzen.
+ */
 public class SerializationHelper {
 
 	public static byte[] serialize(Object obj) throws IOException {

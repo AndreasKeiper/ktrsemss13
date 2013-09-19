@@ -2,6 +2,9 @@ package akkaenvironment.wrapper;
 
 import akka.actor.ActorRef;
 
+/**
+ * Wrapperklasse um die gekapselten Daten mit einer Verfallszeit zu versehen.
+ */
 public class ActorRefTimeWrapper {
 
 	private ActorRef actorRef;

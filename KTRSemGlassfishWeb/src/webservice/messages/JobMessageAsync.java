@@ -3,10 +3,20 @@ package webservice.messages;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+/**
+ * Nachrichtenklasse für die Übertragung von asynchronen per JAX-WS
+ */
 @XmlType
 public class JobMessageAsync {
 
+	/**
+	 * Identifikationsstring des Zielaktors
+	 */
 	private String actorId;
+
+	/**
+	 * Serialisiertes Nachrichtenobjekt
+	 */
 	private byte[] msg;
 
 	public JobMessageAsync() {
